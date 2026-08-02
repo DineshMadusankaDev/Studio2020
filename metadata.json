@@ -1,0 +1,6 @@
+{
+  "name": "Studio2020 - Interior Design & Architecture Studio",
+  "description": "Luxury, minimalist interior design and house-building planning studio website for Studio2020.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

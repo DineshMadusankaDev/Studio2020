@@ -1,0 +1,2213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>Studio2020 — Architectural Planning & Interior Design</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+      /* --- RESETS & BASE VARIABLES --- */
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg-main: #0d0d0d;
+        --bg-card: #121212;
+        --bg-elevated: #1a1a1a;
+        --text-bright: #f5f5f2;
+        --text-subtle: #cfcfcf;
+        --text-muted: #7d7d7d;
+        --border-light: rgba(255, 255, 255, 0.12);
+        --border-hover: rgba(255, 255, 255, 0.35);
+        --font-serif: 'Cormorant Garamond', Georgia, serif;
+        --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      /* --- HIGH CONTRAST ACCESSIBILITY MODE --- */
+      html.high-contrast {
+        --bg-main: #000000;
+        --bg-card: #000000;
+        --bg-elevated: #000000;
+        --text-bright: #ffffff;
+        --text-subtle: #ffffff;
+        --text-muted: #e0e0e0;
+        --border-light: #ffffff;
+        --border-hover: #ffffff;
+      }
+
+      html.high-contrast img, 
+      html.high-contrast .bg-image {
+        filter: grayscale(100%) contrast(1.3) brightness(1.05);
+      }
+
+      html.high-contrast header.scrolled {
+        background-color: #000000;
+        border-bottom: 1px solid #ffffff;
+      }
+
+      html.high-contrast .modal {
+        background-color: rgba(0, 0, 0, 0.98);
+      }
+
+      html.high-contrast .theme-toggle-btn {
+        border-color: #ffffff;
+        color: #ffffff;
+      }
+
+      html.high-contrast .toggle-indicator {
+        background-color: #ffffff;
+        border-color: #ffffff;
+      }
+
+      /* --- GLOBAL LAYOUT & SAFETY --- */
+      html {
+        scroll-behavior: smooth;
+        background-color: var(--bg-main);
+        color: var(--text-bright);
+        font-family: var(--font-sans);
+        font-size: 16px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+        width: 100vw;
+      }
+
+      body {
+        background-color: var(--bg-main);
+        color: var(--text-bright);
+        min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+        width: 100%;
+      }
+
+      /* Grayscale imagery filter requirement */
+      img, .bg-image {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        filter: grayscale(100%) contrast(1.08) brightness(0.95);
+        transition: transform 0.8s var(--ease-out), filter 0.8s var(--ease-out);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button, input, textarea, select {
+        font-family: inherit;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: inherit;
+        touch-action: manipulation;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      /* --- FLUID TYPOGRAPHY WITH CLAMP() --- */
+      .serif {
+        font-family: var(--font-serif);
+        font-weight: 300;
+      }
+
+      .eyebrow {
+        font-family: var(--font-sans);
+        font-size: clamp(0.65rem, 1.5vw, 0.75rem);
+        text-transform: uppercase;
+        letter-spacing: 0.25em;
+        color: var(--text-muted);
+        font-weight: 500;
+        display: block;
+        margin-bottom: 0.8rem;
+      }
+
+      .section-heading {
+        font-family: var(--font-serif);
+        font-size: clamp(2rem, 5.5vw, 4.2rem);
+        font-weight: 300;
+        line-height: 1.12;
+        letter-spacing: -0.01em;
+        margin-bottom: 1.5rem;
+      }
+
+      p {
+        font-size: clamp(0.95rem, 2vw, 1.08rem);
+        line-height: 1.75;
+      }
+
+      /* --- LAYOUT CONTAINERS & SPACING --- */
+      .container {
+        width: 100%;
+        max-width: 1380px;
+        margin: 0 auto;
+        padding: 0 clamp(1.2rem, 4vw, 4rem);
+      }
+
+      .section-padding {
+        padding: clamp(3.5rem, 8vw, 8.5rem) 0;
+      }
+
+      .hairline-top {
+        border-top: 1px solid var(--border-light);
+      }
+
+      .hairline-bottom {
+        border-bottom: 1px solid var(--border-light);
+      }
+
+      /* --- BUTTONS & TOUCH TARGETS --- */
+      .btn-outline {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 0.85rem clamp(1.4rem, 3vw, 2.4rem);
+        border: 1px solid var(--border-light);
+        color: var(--text-bright);
+        font-size: clamp(0.7rem, 1.2vw, 0.78rem);
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        font-weight: 500;
+        transition: all 0.4s var(--ease-out);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        background: transparent;
+        border-radius: 0;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      .btn-outline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--text-bright);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.4s var(--ease-out);
+        z-index: 0;
+      }
+
+      .btn-outline span {
+        position: relative;
+        z-index: 1;
+        transition: color 0.4s var(--ease-out);
+      }
+
+      .btn-outline:hover::before, .btn-outline:focus-visible::before {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+
+      .btn-outline:hover span, .btn-outline:focus-visible span {
+        color: var(--bg-main);
+      }
+
+      /* Theme Toggle Button */
+      .theme-toggle-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        min-height: 44px;
+        padding: 0.5rem 0.9rem;
+        border: 1px solid var(--border-light);
+        font-size: clamp(0.62rem, 1.1vw, 0.7rem);
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--text-subtle);
+        cursor: pointer;
+        transition: all 0.3s var(--ease-out);
+        background: transparent;
+        white-space: nowrap;
+      }
+
+      .theme-toggle-btn:hover {
+        border-color: var(--text-bright);
+        color: var(--text-bright);
+      }
+
+      .toggle-indicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        border: 1px solid var(--text-bright);
+        background-color: transparent;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+        flex-shrink: 0;
+      }
+
+      /* --- HEADER & NAVIGATION --- */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: clamp(1rem, 2.5vw, 1.8rem) 0;
+        transition: padding 0.4s var(--ease-out), background-color 0.4s var(--ease-out), border-color 0.4s var(--ease-out);
+      }
+
+      header.scrolled {
+        padding: clamp(0.75rem, 1.5vw, 1.1rem) 0;
+        background-color: rgba(13, 13, 13, 0.95);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-light);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .logo {
+        font-family: var(--font-serif);
+        font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+        letter-spacing: 0.16em;
+        font-weight: 400;
+        color: var(--text-bright);
+        text-transform: uppercase;
+        display: flex;
+        flex-direction: column;
+        line-height: 1;
+        flex-shrink: 0;
+      }
+
+      .logo span {
+        font-family: var(--font-sans);
+        font-size: clamp(0.55rem, 0.9vw, 0.65rem);
+        letter-spacing: 0.28em;
+        color: var(--text-muted);
+        margin-top: 4px;
+      }
+
+      .nav-desktop {
+        display: none;
+        align-items: center;
+        gap: clamp(1.5rem, 2.8vw, 3rem);
+      }
+
+      @media (min-width: 992px) {
+        .nav-desktop {
+          display: flex;
+        }
+      }
+
+      .nav-link {
+        font-size: clamp(0.7rem, 1vw, 0.78rem);
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: var(--text-subtle);
+        position: relative;
+        padding: 0.4rem 0;
+        transition: color 0.3s ease;
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: var(--text-bright);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.4s var(--ease-out);
+      }
+
+      .nav-link:hover {
+        color: var(--text-bright);
+      }
+
+      .nav-link:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: clamp(0.6rem, 1.5vw, 1.2rem);
+      }
+
+      /* Desktop Get in Touch & Theme toggle visibility control */
+      .header-actions .desktop-only {
+        display: none;
+      }
+
+      @media (min-width: 768px) {
+        .header-actions .desktop-only {
+          display: inline-flex;
+        }
+      }
+
+      /* Mobile Hamburger Button */
+      .hamburger-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 6px;
+        width: 44px;
+        height: 44px;
+        padding: 10px 8px;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        z-index: 1100;
+        position: relative;
+      }
+
+      @media (min-width: 992px) {
+        .hamburger-btn {
+          display: none;
+        }
+      }
+
+      .hamburger-line {
+        width: 100%;
+        height: 1px;
+        background-color: var(--text-bright);
+        transition: transform 0.4s var(--ease-out), opacity 0.3s ease;
+      }
+
+      .hamburger-btn.active .hamburger-line:nth-child(1) {
+        transform: translateY(3.5px) rotate(45deg);
+      }
+
+      .hamburger-btn.active .hamburger-line:nth-child(2) {
+        transform: translateY(-3.5px) rotate(-45deg);
+      }
+
+      /* FULL-SCREEN MOBILE OVERLAY MENU */
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        background-color: var(--bg-main);
+        z-index: 1050;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: clamp(5rem, 12vh, 7rem) clamp(1.5rem, 6vw, 3rem) 3rem clamp(1.5rem, 6vw, 3rem);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out), visibility 0.4s;
+        overflow-y: auto;
+      }
+
+      .mobile-menu.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .mobile-menu-close {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--border-light);
+        color: var(--text-bright);
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 1100;
+      }
+
+      .mobile-nav-list {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(1rem, 3.5vh, 2.2rem);
+      }
+
+      .mobile-nav-link {
+        font-family: var(--font-serif);
+        font-size: clamp(2rem, 7vw, 3.5rem);
+        font-weight: 300;
+        color: var(--text-bright);
+        transition: color 0.3s ease, transform 0.4s var(--ease-out);
+        display: inline-block;
+        line-height: 1.1;
+      }
+
+      .mobile-nav-link:hover, .mobile-nav-link:focus {
+        color: var(--text-subtle);
+        transform: translateX(8px);
+      }
+
+      .mobile-menu-footer {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border-light);
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        font-size: clamp(0.75rem, 1.8vw, 0.85rem);
+        color: var(--text-muted);
+      }
+
+      /* --- HERO SECTION --- */
+      .hero-section {
+        position: relative;
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding-top: clamp(5rem, 12vh, 8rem);
+        padding-bottom: clamp(4rem, 10vh, 6rem);
+      }
+
+      .hero-bg-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+      }
+
+      .hero-bg-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          rgba(13, 13, 13, 0.45) 0%,
+          rgba(13, 13, 13, 0.78) 60%,
+          rgba(13, 13, 13, 1) 100%
+        );
+        z-index: 1;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 980px;
+        text-align: center;
+        margin: 0 auto;
+      }
+
+      .hero-title {
+        font-family: var(--font-serif);
+        font-size: clamp(2.4rem, 7.2vw, 5.8rem);
+        font-weight: 300;
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+        margin-bottom: clamp(1.2rem, 3vw, 2rem);
+        color: var(--text-bright);
+      }
+
+      .hero-subtitle {
+        font-size: clamp(0.92rem, 2vw, 1.2rem);
+        font-weight: 300;
+        color: var(--text-subtle);
+        max-width: 650px;
+        margin: 0 auto clamp(2rem, 4vw, 3rem) auto;
+        line-height: 1.7;
+      }
+
+      .hero-actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(0.8rem, 2vw, 1.5rem);
+        flex-wrap: wrap;
+      }
+
+      .hero-actions .btn-outline {
+        width: 100%;
+        max-width: 280px;
+      }
+
+      @media (min-width: 480px) {
+        .hero-actions .btn-outline {
+          width: auto;
+        }
+      }
+
+      .scroll-indicator {
+        position: absolute;
+        bottom: 1.8rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+      }
+
+      .scroll-text {
+        font-size: 0.62rem;
+        text-transform: uppercase;
+        letter-spacing: 0.28em;
+        color: var(--text-muted);
+      }
+
+      .scroll-line {
+        width: 1px;
+        height: 38px;
+        background-color: var(--border-light);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .scroll-line::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--text-bright);
+        animation: scrollPulse 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+      }
+
+      @keyframes scrollPulse {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(100%); }
+      }
+
+      /* --- ABOUT / PHILOSOPHY SECTION --- */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: clamp(2.5rem, 5vw, 6rem);
+        align-items: center;
+      }
+
+      @media (min-width: 992px) {
+        .about-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .about-image-frame {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        overflow: hidden;
+        border: 1px solid var(--border-light);
+        padding: clamp(8px, 1.5vw, 14px);
+      }
+
+      .about-image-inner {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .about-image-inner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .about-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .about-text {
+        color: var(--text-subtle);
+        font-weight: 300;
+        margin-bottom: 1.2rem;
+      }
+
+      .about-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: clamp(1rem, 3vw, 2.5rem);
+        margin-top: clamp(1.8rem, 4vw, 2.8rem);
+        padding-top: clamp(1.5rem, 3vw, 2.5rem);
+        border-top: 1px solid var(--border-light);
+      }
+
+      @media (max-width: 480px) {
+        .about-stats {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+      }
+
+      .stat-item {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .stat-number {
+        font-family: var(--font-serif);
+        font-size: clamp(2.2rem, 5vw, 3.2rem);
+        font-weight: 300;
+        line-height: 1;
+        color: var(--text-bright);
+        margin-bottom: 0.3rem;
+      }
+
+      .stat-label {
+        font-size: clamp(0.65rem, 1.2vw, 0.72rem);
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--text-muted);
+      }
+
+      /* --- SERVICES SECTION --- */
+      .services-list {
+        display: flex;
+        flex-direction: column;
+        margin-top: clamp(1.8rem, 4vw, 3.2rem);
+      }
+
+      .service-item {
+        padding: clamp(1.8rem, 4vw, 3.2rem) 0;
+        border-bottom: 1px solid var(--border-light);
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        transition: background-color 0.4s var(--ease-out), padding 0.4s var(--ease-out);
+        cursor: pointer;
+      }
+
+      @media (min-width: 768px) {
+        .service-item {
+          grid-template-columns: 70px 1.2fr 2fr 40px;
+          align-items: center;
+          gap: 2rem;
+        }
+      }
+
+      .service-item:hover {
+        background-color: var(--bg-card);
+      }
+
+      @media (min-width: 768px) {
+        .service-item:hover {
+          padding-left: 1.2rem;
+          padding-right: 1.2rem;
+        }
+      }
+
+      .service-header-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      @media (min-width: 768px) {
+        .service-header-mobile {
+          display: contents;
+        }
+      }
+
+      .service-number {
+        font-family: var(--font-serif);
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        color: var(--text-muted);
+        transition: color 0.3s ease;
+      }
+
+      .service-item:hover .service-number {
+        color: var(--text-bright);
+      }
+
+      .service-title {
+        font-family: var(--font-serif);
+        font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+        font-weight: 300;
+        color: var(--text-bright);
+      }
+
+      .service-desc {
+        color: var(--text-subtle);
+        font-weight: 300;
+      }
+
+      .service-arrow {
+        font-size: 1.4rem;
+        color: var(--text-muted);
+        transition: transform 0.4s var(--ease-out), color 0.3s ease;
+      }
+
+      .service-item:hover .service-arrow {
+        transform: translateX(6px);
+        color: var(--text-bright);
+      }
+
+      /* --- WORK PROCESS / TIMELINE SECTION --- */
+      .process-timeline {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+        margin: clamp(2.5rem, 6vw, 4.5rem) 0;
+        position: relative;
+        padding-left: 1.5rem;
+      }
+
+      /* Vertical connecting line for mobile/tablet */
+      .process-timeline::before {
+        content: '';
+        position: absolute;
+        top: 20px;
+        bottom: 20px;
+        left: 35px;
+        width: 1px;
+        background-color: var(--border-light);
+        z-index: 0;
+      }
+
+      @media (min-width: 992px) {
+        .process-timeline {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 1.5rem;
+          padding-left: 0;
+        }
+
+        .process-timeline::before {
+          top: 32px;
+          bottom: auto;
+          left: 5%;
+          width: 90%;
+          height: 1px;
+        }
+      }
+
+      .process-step {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 1.5rem;
+      }
+
+      @media (min-width: 992px) {
+        .process-step {
+          flex-direction: column;
+          gap: 0;
+        }
+      }
+
+      .process-node {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        border: 1px solid var(--border-light);
+        background-color: var(--bg-main);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-serif);
+        font-size: 1.2rem;
+        color: var(--text-bright);
+        transition: border-color 0.4s var(--ease-out), background-color 0.4s var(--ease-out);
+        flex-shrink: 0;
+      }
+
+      @media (min-width: 992px) {
+        .process-node {
+          width: 64px;
+          height: 64px;
+          min-width: 64px;
+          font-size: 1.5rem;
+          margin-bottom: 1.8rem;
+        }
+      }
+
+      .process-step:hover .process-node {
+        border-color: var(--text-bright);
+        background-color: var(--bg-card);
+      }
+
+      .process-body {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .process-title {
+        font-family: var(--font-serif);
+        font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+        font-weight: 300;
+        margin-bottom: 0.4rem;
+        color: var(--text-bright);
+      }
+
+      .process-desc {
+        font-size: clamp(0.82rem, 1.5vw, 0.9rem);
+        color: var(--text-muted);
+        line-height: 1.65;
+        font-weight: 300;
+      }
+
+      /* --- PORTFOLIO GALLERY SECTION --- */
+      .portfolio-filter-container {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        margin-bottom: clamp(2rem, 4vw, 3.5rem);
+        padding-bottom: 0.5rem;
+      }
+
+      .portfolio-filter-container::-webkit-scrollbar {
+        display: none;
+      }
+
+      .portfolio-filter {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: clamp(1.2rem, 3vw, 2.2rem);
+        white-space: nowrap;
+        min-width: max-content;
+        margin: 0 auto;
+      }
+
+      @media (min-width: 768px) {
+        .portfolio-filter {
+          justify-content: center;
+        }
+      }
+
+      .filter-btn {
+        font-size: clamp(0.7rem, 1.2vw, 0.78rem);
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: var(--text-muted);
+        cursor: pointer;
+        padding: 0.5rem 0;
+        position: relative;
+        transition: color 0.3s ease;
+        background: none;
+        border: none;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .filter-btn.active, .filter-btn:hover {
+        color: var(--text-bright);
+      }
+
+      .filter-btn.active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: var(--text-bright);
+      }
+
+      .portfolio-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: clamp(1.5rem, 3vw, 2rem);
+      }
+
+      @media (min-width: 640px) {
+        .portfolio-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 1100px) {
+        .portfolio-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .portfolio-card {
+        position: relative;
+        aspect-ratio: 4 / 5;
+        overflow: hidden;
+        border: 1px solid var(--border-light);
+        cursor: pointer;
+      }
+
+      @media (min-width: 1100px) {
+        .portfolio-card.tall {
+          grid-row: span 2;
+          aspect-ratio: 3 / 8.2;
+        }
+
+        .portfolio-card.wide {
+          grid-column: span 2;
+          aspect-ratio: 16 / 9;
+        }
+      }
+
+      .portfolio-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .portfolio-card:hover img {
+        transform: scale(1.06);
+        filter: grayscale(100%) contrast(1.15) brightness(0.7);
+      }
+
+      .portfolio-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to top,
+          rgba(13, 13, 13, 0.95) 0%,
+          rgba(13, 13, 13, 0.35) 60%,
+          transparent 100%
+        );
+        padding: clamp(1.5rem, 4vw, 2.5rem);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        opacity: 0;
+        transition: opacity 0.4s var(--ease-out);
+      }
+
+      /* Mobile touch optimization: keep overlay slightly readable on touch or tap */
+      @media (max-width: 768px) {
+        .portfolio-overlay {
+          opacity: 1;
+          background: linear-gradient(
+            to top,
+            rgba(13, 13, 13, 0.9) 0%,
+            transparent 80%
+          );
+        }
+      }
+
+      .portfolio-card:hover .portfolio-overlay {
+        opacity: 1;
+      }
+
+      .portfolio-tag {
+        font-size: clamp(0.62rem, 1vw, 0.7rem);
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        color: var(--text-muted);
+        margin-bottom: 0.3rem;
+      }
+
+      .portfolio-title {
+        font-family: var(--font-serif);
+        font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+        font-weight: 300;
+        color: var(--text-bright);
+        margin-bottom: 0.2rem;
+      }
+
+      .portfolio-location {
+        font-size: clamp(0.75rem, 1.2vw, 0.82rem);
+        color: var(--text-subtle);
+      }
+
+      /* --- LIGHTBOX MODAL --- */
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        background-color: rgba(13, 13, 13, 0.96);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        z-index: 2000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: clamp(1rem, 3vw, 2.5rem);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s var(--ease-out), visibility 0.4s;
+      }
+
+      .modal.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal-container {
+        width: 100%;
+        max-width: 1100px;
+        background-color: var(--bg-card);
+        border: 1px solid var(--border-light);
+        display: grid;
+        grid-template-columns: 1fr;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+      }
+
+      @media (min-width: 992px) {
+        .modal-container {
+          grid-template-columns: 1.2fr 1fr;
+          overflow: hidden;
+        }
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 44px;
+        height: 44px;
+        border: 1px solid var(--border-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+        color: var(--text-bright);
+        background-color: rgba(18, 18, 18, 0.8);
+        transition: background-color 0.3s ease;
+      }
+
+      .modal-close:hover {
+        background-color: var(--text-bright);
+        color: var(--bg-main);
+      }
+
+      .modal-media {
+        width: 100%;
+        height: 100%;
+        min-height: 280px;
+        position: relative;
+      }
+
+      .modal-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .modal-info {
+        padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 4vw, 3rem);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .modal-specs {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.2rem;
+        margin: 1.8rem 0;
+        padding: 1.2rem 0;
+        border-top: 1px solid var(--border-light);
+        border-bottom: 1px solid var(--border-light);
+      }
+
+      .spec-item label {
+        font-size: 0.62rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: var(--text-muted);
+        display: block;
+        margin-bottom: 0.2rem;
+      }
+
+      .spec-item span {
+        font-size: clamp(0.85rem, 1.5vw, 0.92rem);
+        color: var(--text-bright);
+      }
+
+      /* --- TESTIMONIAL SECTION --- */
+      .testimonial-section {
+        background-color: var(--bg-card);
+        text-align: center;
+        position: relative;
+      }
+
+      .quote-symbol {
+        font-family: var(--font-serif);
+        font-size: clamp(4rem, 8vw, 6.5rem);
+        color: var(--border-light);
+        line-height: 0.5;
+        margin-bottom: 1rem;
+      }
+
+      .quote-text {
+        font-family: var(--font-serif);
+        font-size: clamp(1.5rem, 3.5vw, 2.6rem);
+        font-weight: 300;
+        line-height: 1.35;
+        max-width: 900px;
+        margin: 0 auto clamp(1.5rem, 3vw, 2.5rem) auto;
+        color: var(--text-bright);
+        font-style: italic;
+      }
+
+      .quote-author {
+        font-size: clamp(0.68rem, 1.2vw, 0.78rem);
+        text-transform: uppercase;
+        letter-spacing: 0.25em;
+        color: var(--text-muted);
+      }
+
+      /* --- CONTACT / FORM SECTION --- */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: clamp(2.5rem, 6vw, 6rem);
+      }
+
+      @media (min-width: 992px) {
+        .contact-grid {
+          grid-template-columns: 1fr 1.2fr;
+        }
+      }
+
+      .contact-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .contact-details {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        margin-top: clamp(1.8rem, 4vw, 3rem);
+      }
+
+      .detail-block label {
+        font-size: clamp(0.65rem, 1vw, 0.72rem);
+        text-transform: uppercase;
+        letter-spacing: 0.25em;
+        color: var(--text-muted);
+        display: block;
+        margin-bottom: 0.4rem;
+      }
+
+      .detail-block p, .detail-block a {
+        font-size: clamp(1rem, 2vw, 1.15rem);
+        color: var(--text-bright);
+        font-weight: 300;
+      }
+
+      .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(1.5rem, 3vw, 2.2rem);
+      }
+
+      .form-group {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-group label {
+        font-size: clamp(0.68rem, 1.1vw, 0.75rem);
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: var(--text-muted);
+        margin-bottom: 0.5rem;
+        transition: color 0.3s ease;
+      }
+
+      .form-control {
+        width: 100%;
+        min-height: 48px;
+        padding: 0.8rem 0;
+        border: none;
+        border-bottom: 1px solid var(--border-light);
+        background: transparent;
+        color: var(--text-bright);
+        font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+        font-weight: 300;
+        transition: border-color 0.4s var(--ease-out);
+        border-radius: 0;
+      }
+
+      .form-control:focus {
+        border-bottom-color: var(--text-bright);
+      }
+
+      .form-group:focus-within label {
+        color: var(--text-bright);
+      }
+
+      textarea.form-control {
+        resize: vertical;
+        min-height: 110px;
+      }
+
+      select.form-controlOption {
+        background-color: var(--bg-main);
+        color: var(--text-bright);
+      }
+
+      .form-status {
+        padding: 1.2rem;
+        border: 1px solid var(--border-light);
+        background-color: var(--bg-card);
+        font-size: 0.88rem;
+        color: var(--text-bright);
+        display: none;
+        margin-top: 1rem;
+      }
+
+      .form-status.active {
+        display: block;
+      }
+
+      .contact-form .btn-outline {
+        width: 100%;
+      }
+
+      @media (min-width: 640px) {
+        .contact-form .btn-outline {
+          width: auto;
+          align-self: flex-start;
+        }
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        padding: clamp(3.5rem, 8vw, 5.5rem) 0 2.5rem 0;
+        background-color: var(--bg-main);
+        border-top: 1px solid var(--border-light);
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: clamp(2rem, 4vw, 3.5rem);
+        margin-bottom: clamp(2.5rem, 5vw, 4rem);
+      }
+
+      @media (min-width: 768px) {
+        .footer-grid {
+          grid-template-columns: 1.5fr 1fr 1fr;
+        }
+      }
+
+      .footer-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .footer-brand p {
+        color: var(--text-muted);
+        font-size: clamp(0.85rem, 1.5vw, 0.92rem);
+        max-width: 340px;
+        line-height: 1.7;
+      }
+
+      .footer-title {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.25em;
+        color: var(--text-muted);
+        margin-bottom: 1.2rem;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+
+      .footer-link {
+        font-size: clamp(0.85rem, 1.5vw, 0.92rem);
+        color: var(--text-subtle);
+        transition: color 0.3s ease;
+        padding: 0.2rem 0;
+        display: inline-block;
+      }
+
+      .footer-link:hover {
+        color: var(--text-bright);
+      }
+
+      .footer-bottom {
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+      }
+
+      @media (min-width: 768px) {
+        .footer-bottom {
+          flex-direction: row;
+          align-items: center;
+        }
+      }
+
+      /* --- SCROLL REVEAL ANIMATIONS --- */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+      }
+
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .stagger-1 { transition-delay: 0.08s; }
+      .stagger-2 { transition-delay: 0.16s; }
+      .stagger-3 { transition-delay: 0.24s; }
+      .stagger-4 { transition-delay: 0.32s; }
+    </style>
+  </head>
+  <body>
+
+    <!-- HEADER / NAVIGATION -->
+    <header id="main-header">
+      <div class="container header-inner">
+        <a href="#hero" class="logo">
+          STUDIO2020
+          <span>LONDON · ZURICH</span>
+        </a>
+
+        <nav class="nav-desktop">
+          <a href="#hero" class="nav-link">Home</a>
+          <a href="#about" class="nav-link">Philosophy</a>
+          <a href="#services" class="nav-link">Services</a>
+          <a href="#portfolio" class="nav-link">Portfolio</a>
+          <a href="#process" class="nav-link">Process</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="theme-toggle-btn desktop-only" id="contrast-toggle" aria-label="Toggle High Contrast Mode" title="Toggle High Contrast Mode">
+            <span class="toggle-indicator"></span>
+            <span class="toggle-text">High Contrast</span>
+          </button>
+
+          <a href="#contact" class="btn-outline desktop-only">
+            <span>Get in Touch</span>
+          </a>
+
+          <button class="hamburger-btn" id="hamburger-toggle" aria-label="Open Navigation Menu">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- FULL-SCREEN MOBILE MENU OVERLAY -->
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close Navigation Menu">&times;</button>
+      
+      <nav class="mobile-nav-list">
+        <a href="#hero" class="mobile-nav-link mobile-link">Home</a>
+        <a href="#about" class="mobile-nav-link mobile-link">Philosophy</a>
+        <a href="#services" class="mobile-nav-link mobile-link">Services</a>
+        <a href="#portfolio" class="mobile-nav-link mobile-link">Portfolio</a>
+        <a href="#process" class="mobile-nav-link mobile-link">Process</a>
+        <a href="#contact" class="mobile-nav-link mobile-link">Contact</a>
+      </nav>
+
+      <div class="mobile-menu-footer">
+        <button class="theme-toggle-btn" id="mobile-contrast-toggle" aria-label="Toggle High Contrast Mode" style="align-self: flex-start; margin-bottom: 0.5rem;">
+          <span class="toggle-indicator"></span>
+          <span class="toggle-text">High Contrast</span>
+        </button>
+        <p>STUDIO2020 ARCHITECTURE & INTERIORS</p>
+        <p>inquiries@studio2020.design</p>
+        <p>+44 (0)20 7946 0192</p>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+      <!-- 1. HERO SECTION -->
+      <section id="hero" class="hero-section">
+        <div class="hero-bg-wrapper">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80" alt="Monochrome Architectural Masterpiece" />
+        </div>
+        <div class="hero-overlay"></div>
+
+        <div class="container hero-content">
+          <span class="eyebrow reveal stagger-1">Architectural Planning & Interior Design</span>
+          <h1 class="hero-title reveal stagger-2">Timeless Spaces.<br />Considered Living.</h1>
+          <p class="hero-subtitle reveal stagger-3">
+            Crafting bespoke private sanctuaries that harmonize quiet architectural elegance with meticulous spatial refinement and noble materiality.
+          </p>
+          <div class="hero-actions reveal stagger-4">
+            <a href="#portfolio" class="btn-outline">
+              <span>Explore Portfolio</span>
+            </a>
+            <a href="#about" class="btn-outline">
+              <span>Our Philosophy</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="#about" class="scroll-indicator" aria-label="Scroll down to philosophy">
+          <span class="scroll-text">Scroll</span>
+          <div class="scroll-line"></div>
+        </a>
+      </section>
+
+      <!-- 2. ABOUT / PHILOSOPHY SECTION -->
+      <section id="about" class="section-padding hairline-top">
+        <div class="container">
+          <div class="about-grid">
+            <div class="about-image-frame reveal">
+              <div class="about-image-inner">
+                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80" alt="Studio2020 Design Philosophy" />
+              </div>
+            </div>
+
+            <div class="about-content">
+              <span class="eyebrow reveal">Our Philosophy</span>
+              <h2 class="section-heading reveal">Architecture as an Unspoken Language</h2>
+              <p class="about-text reveal">
+                At Studio2020, we believe true luxury is quiet. It is not declared through opulent ornamentation, but felt through harmonious proportions, natural illumination, and noble, tactile materials that age with grace.
+              </p>
+              <p class="about-text reveal">
+                Each commission begins as an intimate dialogue between structural precision and human experience. Whether planning a coastal cliffside residence or curating a historic Mayfair townhouse, our work strips away noise to reveal spatial clarity.
+              </p>
+
+              <div class="about-stats reveal">
+                <div class="stat-item">
+                  <span class="stat-number">15+</span>
+                  <span class="stat-label">Years of Mastery</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-number">40+</span>
+                  <span class="stat-label">Private Estates</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-number">3</span>
+                  <span class="stat-label">Global Studios</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. SERVICES SECTION -->
+      <section id="services" class="section-padding hairline-top">
+        <div class="container">
+          <span class="eyebrow reveal">Capabilities</span>
+          <h2 class="section-heading reveal">Services & Specializations</h2>
+
+          <div class="services-list">
+            
+            <div class="service-item reveal">
+              <div class="service-header-mobile">
+                <div class="service-number">01</div>
+                <div class="service-arrow">→</div>
+              </div>
+              <div class="service-title">Interior Design</div>
+              <div class="service-desc">
+                Bespoke interior architecture, tailored spatial layouts, custom millwork design, and curated lighting schemes crafted to elevate daily rituals.
+              </div>
+              <div class="service-arrow desktop-only">→</div>
+            </div>
+
+            <div class="service-item reveal">
+              <div class="service-header-mobile">
+                <div class="service-number">02</div>
+                <div class="service-arrow">→</div>
+              </div>
+              <div class="service-title">Architectural Planning</div>
+              <div class="service-desc">
+                Full-scale residential master planning, site analysis, structural engineering integration, and regulatory approvals for ground-up luxury builds.
+              </div>
+              <div class="service-arrow desktop-only">→</div>
+            </div>
+
+            <div class="service-item reveal">
+              <div class="service-header-mobile">
+                <div class="service-number">03</div>
+                <div class="service-arrow">→</div>
+              </div>
+              <div class="service-title">Renovation & Restorations</div>
+              <div class="service-desc">
+                Sensitive modernization of heritage structures and modern estates, preserving historical character while embedding state-of-the-art living systems.
+              </div>
+              <div class="service-arrow desktop-only">→</div>
+            </div>
+
+            <div class="service-item reveal">
+              <div class="service-header-mobile">
+                <div class="service-number">04</div>
+                <div class="service-arrow">→</div>
+              </div>
+              <div class="service-title">Furniture & Art Curation</div>
+              <div class="service-desc">
+                Global sourcing of rare vintage design masterworks, commissioned artisan furniture, and cohesive fine art placement for unified environments.
+              </div>
+              <div class="service-arrow desktop-only">→</div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. WORK PROCESS SECTION -->
+      <section id="process" class="section-padding hairline-top">
+        <div class="container">
+          <div style="text-align: center; max-width: 720px; margin: 0 auto;">
+            <span class="eyebrow reveal">Methodology</span>
+            <h2 class="section-heading reveal">The Design Journey</h2>
+            <p style="color: var(--text-subtle); font-weight: 300;" class="reveal">
+              A disciplined five-stage progression ensuring clarity, structural fidelity, and seamless execution from initial concept to key handover.
+            </p>
+          </div>
+
+          <div class="process-timeline">
+            
+            <div class="process-step reveal stagger-1">
+              <div class="process-node">01</div>
+              <div class="process-body">
+                <h3 class="process-title">Consultation</h3>
+                <p class="process-desc">Site analysis, lifestyle interview, architectural feasibility, and project scope definition.</p>
+              </div>
+            </div>
+
+            <div class="process-step reveal stagger-2">
+              <div class="process-node">02</div>
+              <div class="process-body">
+                <h3 class="process-title">Concept</h3>
+                <p class="process-desc">Spatial volume studies, massing models, material palettes, and initial layout schematics.</p>
+              </div>
+            </div>
+
+            <div class="process-step reveal stagger-3">
+              <div class="process-node">03</div>
+              <div class="process-body">
+                <h3 class="process-title">Design</h3>
+                <p class="process-desc">Detailed construction blueprints, interior joinery specs, lighting plans, and permit documentation.</p>
+              </div>
+            </div>
+
+            <div class="process-step reveal stagger-4">
+              <div class="process-node">04</div>
+              <div class="process-body">
+                <h3 class="process-title">Build</h3>
+                <p class="process-desc">On-site architectural supervision, craftsman management, structural execution, and quality control.</p>
+              </div>
+            </div>
+
+            <div class="process-step reveal stagger-4">
+              <div class="process-node">05</div>
+              <div class="process-body">
+                <h3 class="process-title">Handover</h3>
+                <p class="process-desc">Final furniture curation, art placement, white-glove commissioning, and private client key delivery.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div style="text-align: center;" class="reveal">
+            <a href="#contact" class="btn-outline">
+              <span>Book a Consultation</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. PORTFOLIO / GALLERY SECTION -->
+      <section id="portfolio" class="section-padding hairline-top">
+        <div class="container">
+          <div style="text-align: center; margin-bottom: 2rem;">
+            <span class="eyebrow reveal">Selected Works</span>
+            <h2 class="section-heading reveal">Portfolio of Estates</h2>
+          </div>
+
+          <!-- Horizontally Scrollable Filter Tabs -->
+          <div class="portfolio-filter-container reveal">
+            <div class="portfolio-filter">
+              <button class="filter-btn active" data-filter="all">All Projects</button>
+              <button class="filter-btn" data-filter="interiors">Interiors</button>
+              <button class="filter-btn" data-filter="architecture">Architecture</button>
+              <button class="filter-btn" data-filter="furniture">Furniture & Art</button>
+            </div>
+          </div>
+
+          <!-- Asymmetric / Responsive Gallery Grid -->
+          <div class="portfolio-grid" id="portfolio-grid">
+            
+            <!-- Item 1 -->
+            <div class="portfolio-card tall reveal" data-category="architecture" data-id="1">
+              <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=1200&q=80" alt="Monolith Cliff Residence" />
+              <div class="portfolio-overlay">
+                <span class="portfolio-tag">Architecture · 2025</span>
+                <h3 class="portfolio-title">Monolith Villa</h3>
+                <p class="portfolio-location">Zurich, Switzerland</p>
+              </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="portfolio-card reveal" data-category="interiors" data-id="2">
+              <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80" alt="Nocturne Penthouse Interior" />
+              <div class="portfolio-overlay">
+                <span class="portfolio-tag">Interiors · 2025</span>
+                <h3 class="portfolio-title">Nocturne Penthouse</h3>
+                <p class="portfolio-location">Mayfair, London</p>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="portfolio-card reveal" data-category="architecture" data-id="3">
+              <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80" alt="Komorebi Forest House" />
+              <div class="portfolio-overlay">
+                <span class="portfolio-tag">Architecture · 2024</span>
+                <h3 class="portfolio-title">Komorebi Estate</h3>
+                <p class="portfolio-location">Kyoto, Japan</p>
+              </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="portfolio-card wide reveal" data-category="interiors" data-id="4">
+              <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80" alt="Zen Courtyard & Interior" />
+              <div class="portfolio-overlay">
+                <span class="portfolio-tag">Interiors · 2024</span>
+                <h3 class="portfolio-title">Atrium Pavilion</h3>
+                <p class="portfolio-location">Malibu, California</p>
+              </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="portfolio-card reveal" data-category="furniture" data-id="5">
+              <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80" alt="Bespoke Oak Curation" />
+              <div class="portfolio-overlay">
+                <span class="portfolio-tag">Furniture · 2024</span>
+                <h3 class="portfolio-title">Bespoke Oak Curation</h3>
+                <p class="portfolio-location">Paris, France</p>
+              </div>
+            </div>
+
+            <!-- Item 6 -->
+            <div class="portfolio-card reveal" data-category="architecture" data-id="6">
+              <img src="https://images.unsplash.com/photo-1600573472591-401b4f6a3c20?auto=format&fit=crop&w=1200&q=80" alt="The Crest Hillside Estate" />
+              <div class="portfolio-overlay">
+                <span class="portfolio-tag">Architecture · 2023</span>
+                <h3 class="portfolio-title">The Crest Manor</h3>
+                <p class="portfolio-location">Cotswolds, UK</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. TESTIMONIAL / QUOTE SECTION -->
+      <section class="testimonial-section section-padding hairline-top">
+        <div class="container">
+          <div class="quote-symbol">“</div>
+          <p class="quote-text reveal">
+            Studio2020 did not simply build our residence; they sculptured an atmosphere where every shadow, opening, and surface feels deliberately composed for peace and timeless sanctuary.
+          </p>
+          <p class="quote-author reveal">— VICTORIA & ALEXANDER VAUGHAN, THE CREST RESIDENCE</p>
+        </div>
+      </section>
+
+      <!-- 7. CONTACT / CTA SECTION -->
+      <section id="contact" class="section-padding hairline-top">
+        <div class="container">
+          <div class="contact-grid">
+            
+            <div class="contact-info">
+              <div>
+                <span class="eyebrow reveal">Inquiries</span>
+                <h2 class="section-heading reveal">Let’s Design Your Next Space</h2>
+                <p style="color: var(--text-subtle); font-weight: 300;" class="reveal">
+                  We accept a limited number of private residential and architectural commissions each year to maintain uncompromising craftsmanship.
+                </p>
+              </div>
+
+              <div class="contact-details reveal">
+                <div class="detail-block">
+                  <label>General Inquiries</label>
+                  <a href="mailto:inquiries@studio2020.design">inquiries@studio2020.design</a>
+                </div>
+
+                <div class="detail-block">
+                  <label>Direct Telephone</label>
+                  <p>+44 (0)20 7946 0192</p>
+                </div>
+
+                <div class="detail-block">
+                  <label>London Headquarters</label>
+                  <p>Mayfair Studios, 14 Berkeley Square<br />London W1J 6CB, United Kingdom</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Minimal Form -->
+            <div>
+              <form class="contact-form reveal" id="consultation-form">
+                <div class="form-group">
+                  <label for="name">Your Name *</label>
+                  <input type="text" id="name" required class="form-control" placeholder="Lord / Lady / Mr. / Ms. Full Name" />
+                </div>
+
+                <div class="form-group">
+                  <label for="email">Email Address *</label>
+                  <input type="email" id="email" required class="form-control" placeholder="name@domain.com" />
+                </div>
+
+                <div class="form-group">
+                  <label for="service">Commission Type *</label>
+                  <select id="service" required class="form-control form-controlOption">
+                    <option value="" disabled selected>Select Primary Interest</option>
+                    <option value="architectural-planning">Architectural Planning & Build</option>
+                    <option value="interior-design">Complete Interior Design</option>
+                    <option value="renovation">Estate Renovation & Modernization</option>
+                    <option value="curation">Furniture & Fine Art Curation</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="message">Project Scope & Location *</label>
+                  <textarea id="message" required class="form-control" placeholder="Share brief details regarding site location, timeline, and spatial vision..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-outline">
+                  <span>Submit Private Inquiry</span>
+                </button>
+
+                <div class="form-status" id="form-status-msg">
+                  Thank you for reaching out to Studio2020. Your private inquiry has been received. Our studio director will respond within 24 business hours.
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- PORTFOLIO LIGHTBOX MODAL -->
+    <div class="modal" id="portfolio-modal" aria-hidden="true">
+      <div class="modal-container">
+        <button class="modal-close" id="modal-close-btn" aria-label="Close project modal">&times;</button>
+        <div class="modal-media">
+          <img id="modal-img" src="" alt="Project View" />
+        </div>
+        <div class="modal-info">
+          <span class="eyebrow" id="modal-tag">Architecture</span>
+          <h2 class="serif" id="modal-title" style="font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 0.5rem;">Project Title</h2>
+          <p id="modal-loc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Location</p>
+          <p id="modal-desc" style="color: var(--text-subtle); font-weight: 300; line-height: 1.7;">
+            Detailed description of the architectural project.
+          </p>
+
+          <div class="modal-specs">
+            <div class="spec-item">
+              <label>Footprint</label>
+              <span id="modal-area">1,200 sq. m</span>
+            </div>
+            <div class="spec-item">
+              <label>Completion</label>
+              <span id="modal-year">2025</span>
+            </div>
+            <div class="spec-item">
+              <label>Lead Architect</label>
+              <span id="modal-architect">Elena Rostova</span>
+            </div>
+            <div class="spec-item">
+              <label>Materiality</label>
+              <span id="modal-materials">Basalt, Oak, Glass</span>
+            </div>
+          </div>
+
+          <a href="#contact" class="btn-outline" id="modal-cta-btn">
+            <span>Inquire About Similar Project</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          
+          <div class="footer-brand">
+            <a href="#hero" class="logo">STUDIO2020</a>
+            <p>
+              An international architecture and interior planning studio dedicated to quiet luxury, structural purity, and bespoke residential design.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="footer-title">Navigation</h4>
+            <div class="footer-links">
+              <a href="#hero" class="footer-link">Home</a>
+              <a href="#about" class="footer-link">Philosophy</a>
+              <a href="#services" class="footer-link">Services</a>
+              <a href="#portfolio" class="footer-link">Portfolio</a>
+              <a href="#process" class="footer-link">Process</a>
+              <a href="#contact" class="footer-link">Contact</a>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="footer-title">Locations</h4>
+            <div class="footer-links">
+              <span class="footer-link" style="color: var(--text-bright);">London · Mayfair</span>
+              <span class="footer-link" style="color: var(--text-bright);">Zurich · Seefeld</span>
+              <span class="footer-link" style="color: var(--text-bright);">Tokyo · Minato</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2026 Studio2020 Architecture & Interior Design Ltd. All rights reserved.</p>
+          <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+            <a href="#hero" class="footer-link" style="font-size: 0.75rem;">Privacy Policy</a>
+            <a href="#hero" class="footer-link" style="font-size: 0.75rem;">Terms of Commission</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+
+        // 1. STICKY HEADER SCROLL EFFECT
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+          } else {
+            header.classList.remove('scrolled');
+          }
+        });
+
+        // 2. FULL-SCREEN MOBILE OVERLAY MENU TOGGLE
+        const hamburgerBtn = document.getElementById('hamburger-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        const toggleMenu = () => {
+          const isActive = mobileMenu.classList.contains('active');
+          if (isActive) {
+            mobileMenu.classList.remove('active');
+            hamburgerBtn.classList.remove('active');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+          } else {
+            mobileMenu.classList.add('active');
+            hamburgerBtn.classList.add('active');
+            mobileMenu.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+          }
+        };
+
+        if (hamburgerBtn && mobileMenu) {
+          hamburgerBtn.addEventListener('click', toggleMenu);
+        }
+
+        if (mobileMenuClose) {
+          mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            if (hamburgerBtn) hamburgerBtn.classList.remove('active');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+          });
+        }
+
+        mobileLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            if (hamburgerBtn) hamburgerBtn.classList.remove('active');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+          });
+        });
+
+        // 3. SCROLL REVEAL ANIMATIONS (INTERSECTION OBSERVER)
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          root: null,
+          threshold: 0.1,
+          rootMargin: '0px 0px -40px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 4. PORTFOLIO FILTERING
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioCards = document.querySelectorAll('.portfolio-card');
+
+        filterBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filterValue = btn.getAttribute('data-filter');
+
+            portfolioCards.forEach(card => {
+              const category = card.getAttribute('data-category');
+              if (filterValue === 'all' || filterValue === category) {
+                card.style.display = 'block';
+                setTimeout(() => { card.style.opacity = '1'; }, 50);
+              } else {
+                card.style.opacity = '0';
+                setTimeout(() => { card.style.display = 'none'; }, 300);
+              }
+            });
+          });
+        });
+
+        // 5. PORTFOLIO LIGHTBOX MODAL DATA & EVENT HANDLERS
+        const portfolioData = {
+          '1': {
+            title: 'Monolith Villa',
+            category: 'Architecture',
+            location: 'Zurich, Switzerland',
+            img: 'https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=1200&q=80',
+            desc: 'Carved directly into the basalt cliffs overlooking Lake Zurich, this residence merges raw poured concrete with expansive triple-glazed thermal glass walls for total landscape immersion.',
+            area: '1,450 sq. m',
+            year: '2025',
+            architect: 'Henrik Vane & Elena Rostova',
+            materials: 'Basalt Concrete, Smoked Oak, Triple Glass'
+          },
+          '2': {
+            title: 'Nocturne Penthouse',
+            category: 'Interiors',
+            location: 'Mayfair, London',
+            img: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80',
+            desc: 'A dark, serene penthouse sanctuary in central London featuring custom black acoustic wood paneling, tactile leather upholstery, and concealed ambient architectural lighting.',
+            area: '620 sq. m',
+            year: '2025',
+            architect: 'Elena Rostova',
+            materials: 'Charcoal Oak, Black Marble, Bronze'
+          },
+          '3': {
+            title: 'Komorebi Estate',
+            category: 'Architecture',
+            location: 'Kyoto, Japan',
+            img: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80',
+            desc: 'Inspired by the Japanese concept of sunlight filtering through trees, this pavilion features Shou Sugi Ban charred cedar facades and a central stone reflection pool.',
+            area: '980 sq. m',
+            year: '2024',
+            architect: 'Kenji Takahashi',
+            materials: 'Charred Cedar, River Stone, Washi Glass'
+          },
+          '4': {
+            title: 'Atrium Pavilion',
+            category: 'Interiors',
+            location: 'Malibu, California',
+            img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80',
+            desc: 'A seamless indoor-outdoor oceanfront villa centering around an open sky atrium with monolithic stone water features and floor-to-ceiling glass doors.',
+            area: '1,100 sq. m',
+            year: '2024',
+            architect: 'Henrik Vane',
+            materials: 'Travertine, Bleached Ash, Anodized Steel'
+          },
+          '5': {
+            title: 'Bespoke Oak Curation',
+            category: 'Furniture',
+            location: 'Paris, France',
+            img: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80',
+            desc: 'A curated collection of hand-carved solid oak dining masterworks, custom minimalist lounge seating, and commissioned monochrome bronze sculptures.',
+            area: 'Private Collection',
+            year: '2024',
+            architect: 'Studio2020 Artisan Workshop',
+            materials: 'French Oak, Hand-beaten Bronze, Linen'
+          },
+          '6': {
+            title: 'The Crest Manor',
+            category: 'Architecture',
+            location: 'Cotswolds, UK',
+            img: 'https://images.unsplash.com/photo-1600573472591-401b4f6a3c20?auto=format&fit=crop&w=1200&q=80',
+            desc: 'A modern interpretation of the classical English manor house, featuring locally quarried Cotswold limestone paired with sleek black steel fenestration.',
+            area: '1,800 sq. m',
+            year: '2023',
+            architect: 'Henrik Vane',
+            materials: 'Cotswold Stone, Black Steel, Slated Roof'
+          }
+        };
+
+        const modal = document.getElementById('portfolio-modal');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+        const modalCtaBtn = document.getElementById('modal-cta-btn');
+
+        const modalImg = document.getElementById('modal-img');
+        const modalTag = document.getElementById('modal-tag');
+        const modalTitle = document.getElementById('modal-title');
+        const modalLoc = document.getElementById('modal-loc');
+        const modalDesc = document.getElementById('modal-desc');
+        const modalArea = document.getElementById('modal-area');
+        const modalYear = document.getElementById('modal-year');
+        const modalArchitect = document.getElementById('modal-architect');
+        const modalMaterials = document.getElementById('modal-materials');
+
+        portfolioCards.forEach(card => {
+          card.addEventListener('click', () => {
+            const id = card.getAttribute('data-id');
+            const data = portfolioData[id];
+
+            if (data) {
+              modalImg.src = data.img;
+              modalImg.alt = data.title;
+              modalTag.textContent = data.category;
+              modalTitle.textContent = data.title;
+              modalLoc.textContent = data.location;
+              modalDesc.textContent = data.desc;
+              modalArea.textContent = data.area;
+              modalYear.textContent = data.year;
+              modalArchitect.textContent = data.architect;
+              modalMaterials.textContent = data.materials;
+
+              modal.classList.add('active');
+              modal.setAttribute('aria-hidden', 'false');
+              document.body.style.overflow = 'hidden';
+            }
+          });
+        });
+
+        const closeModal = () => {
+          modal.classList.remove('active');
+          modal.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        };
+
+        if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+        if (modalCtaBtn) modalCtaBtn.addEventListener('click', closeModal);
+
+        if (modal) {
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+          });
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+            closeModal();
+          }
+        });
+
+        // 6. CONTACT FORM SUBMISSION MOCK
+        const contactForm = document.getElementById('consultation-form');
+        const formStatus = document.getElementById('form-status-msg');
+
+        if (contactForm) {
+          contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            formStatus.classList.add('active');
+            contactForm.reset();
+
+            setTimeout(() => {
+              formStatus.classList.remove('active');
+            }, 8000);
+          });
+        }
+
+        // 7. HIGH CONTRAST ACCESSIBILITY MODE TOGGLE
+        const contrastToggleBtns = [
+          document.getElementById('contrast-toggle'),
+          document.getElementById('mobile-contrast-toggle')
+        ];
+
+        const updateContrastUI = (isHighContrast) => {
+          if (isHighContrast) {
+            document.documentElement.classList.add('high-contrast');
+            contrastToggleBtns.forEach(btn => {
+              if (btn) {
+                btn.setAttribute('aria-pressed', 'true');
+                const textSpan = btn.querySelector('.toggle-text');
+                if (textSpan) textSpan.textContent = 'High Contrast: On';
+              }
+            });
+          } else {
+            document.documentElement.classList.remove('high-contrast');
+            contrastToggleBtns.forEach(btn => {
+              if (btn) {
+                btn.setAttribute('aria-pressed', 'false');
+                const textSpan = btn.querySelector('.toggle-text');
+                if (textSpan) textSpan.textContent = 'High Contrast';
+              }
+            });
+          }
+        };
+
+        const savedContrast = localStorage.getItem('studio2020_high_contrast') === 'true';
+        updateContrastUI(savedContrast);
+
+        contrastToggleBtns.forEach(btn => {
+          if (btn) {
+            btn.addEventListener('click', () => {
+              const isCurrentlyHigh = document.documentElement.classList.contains('high-contrast');
+              const newStatus = !isCurrentlyHigh;
+              localStorage.setItem('studio2020_high_contrast', newStatus);
+              updateContrastUI(newStatus);
+            });
+          }
+        });
+
+      });
+    </script>
+  </body>
+</html>
