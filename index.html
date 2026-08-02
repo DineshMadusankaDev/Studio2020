@@ -697,83 +697,119 @@
       .services-list {
         display: flex;
         flex-direction: column;
-        margin-top: clamp(1.8rem, 4vw, 3.2rem);
+        margin-top: clamp(2rem, 4vw, 3.5rem);
+        border-top: 1px solid var(--border-light);
       }
 
       .service-item {
-        padding: clamp(1.8rem, 4vw, 3.2rem) 0;
+        padding: clamp(2.5rem, 5vw, 4rem) 0;
         border-bottom: 1px solid var(--border-light);
         display: grid;
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 1.5rem;
         transition: background-color 0.4s var(--ease-out), padding 0.4s var(--ease-out);
         cursor: pointer;
       }
 
       @media (min-width: 768px) {
         .service-item {
-          grid-template-columns: 70px 1.2fr 2fr 40px;
-          align-items: center;
-          gap: 2rem;
+          grid-template-columns: 320px 1fr;
+          gap: 3rem;
+          align-items: flex-start;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .service-item {
+          grid-template-columns: 380px 1fr;
+          gap: 4rem;
         }
       }
 
       .service-item:hover {
-        background-color: var(--bg-card);
+        background-color: rgba(255, 255, 255, 0.02);
       }
 
       @media (min-width: 768px) {
         .service-item:hover {
-          padding-left: 1.2rem;
-          padding-right: 1.2rem;
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
         }
       }
 
-      .service-header-mobile {
+      .service-left {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+
+      .service-num-wrap {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-      }
-
-      @media (min-width: 768px) {
-        .service-header-mobile {
-          display: contents;
-        }
+        gap: 0.8rem;
       }
 
       .service-number {
         font-family: var(--font-serif);
-        font-size: clamp(1.5rem, 3vw, 2rem);
-        color: var(--text-muted);
-        transition: color 0.3s ease;
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 300;
+        line-height: 1;
+        color: #888888;
+        transition: color 0.4s ease, transform 0.4s var(--ease-out);
       }
 
-      .service-item:hover .service-number {
-        color: var(--text-bright);
+      .service-arrow {
+        font-size: 1.2rem;
+        color: #888888;
+        opacity: 0.7;
+        transition: transform 0.4s var(--ease-out), color 0.4s ease, opacity 0.4s ease;
       }
 
       .service-title {
         font-family: var(--font-serif);
-        font-size: clamp(1.6rem, 3.5vw, 2.2rem);
-        font-weight: 300;
-        color: var(--text-bright);
+        font-size: clamp(1.4rem, 2.5vw, 2rem);
+        font-weight: 400;
+        color: #ffffff;
+        line-height: 1.25;
+        transition: transform 0.4s var(--ease-out), color 0.4s ease;
+      }
+
+      .service-right {
+        display: flex;
+        align-items: flex-start;
       }
 
       .service-desc {
-        color: var(--text-subtle);
+        font-family: var(--font-sans);
+        font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+        line-height: 1.7;
+        color: #bbbbbb;
         font-weight: 300;
+        max-width: 550px;
+        width: 100%;
+        margin: 0;
+        transition: color 0.4s ease;
       }
 
-      .service-arrow {
-        font-size: 1.4rem;
-        color: var(--text-muted);
-        transition: transform 0.4s var(--ease-out), color 0.3s ease;
+      /* Hover States */
+      .service-item:hover .service-number {
+        color: #ffffff;
+        transform: translateX(4px);
       }
 
       .service-item:hover .service-arrow {
-        transform: translateX(6px);
-        color: var(--text-bright);
+        color: #ffffff;
+        opacity: 1;
+        transform: translateX(8px);
+      }
+
+      .service-item:hover .service-title {
+        color: #ffffff;
+        transform: translateX(4px);
+      }
+
+      .service-item:hover .service-desc {
+        color: #e5e5e5;
       }
 
       /* --- WORK PROCESS / TIMELINE SECTION --- */
@@ -1286,6 +1322,44 @@
         color: var(--text-bright);
       }
 
+      select.form-controlOption option {
+        background-color: #121212;
+        color: #ffffff;
+      }
+
+      .field-error-msg {
+        font-size: 0.72rem;
+        color: #888888;
+        letter-spacing: 0.05em;
+        margin-top: 0.35rem;
+        display: none;
+      }
+
+      .field-error-msg.visible {
+        display: block;
+      }
+
+      .form-control.invalid-field {
+        border-bottom-color: #ffffff !important;
+        box-shadow: 0 1px 0 0 #ffffff;
+      }
+
+      .btn-outline.loading {
+        opacity: 0.8;
+        cursor: wait;
+        animation: pulseBtn 0.8s infinite alternate ease-in-out;
+      }
+
+      @keyframes pulseBtn {
+        from {
+          border-color: rgba(255, 255, 255, 0.4);
+        }
+        to {
+          border-color: rgba(255, 255, 255, 1);
+          box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+        }
+      }
+
       .form-status {
         padding: 1.2rem;
         border: 1px solid var(--border-light);
@@ -1548,51 +1622,63 @@
           <div class="services-list">
             
             <div class="service-item reveal">
-              <div class="service-header-mobile">
-                <div class="service-number">01</div>
-                <div class="service-arrow">→</div>
+              <div class="service-left">
+                <div class="service-num-wrap">
+                  <span class="service-number">01</span>
+                  <span class="service-arrow">→</span>
+                </div>
+                <h3 class="service-title">Interior Design</h3>
               </div>
-              <div class="service-title">Interior Design</div>
-              <div class="service-desc">
-                Bespoke interior architecture, tailored spatial layouts, custom millwork design, and curated lighting schemes crafted to elevate daily rituals.
+              <div class="service-right">
+                <p class="service-desc">
+                  Bespoke interior architecture, tailored spatial layouts, custom millwork design, and curated lighting schemes crafted to elevate daily rituals.
+                </p>
               </div>
-              <div class="service-arrow desktop-only">→</div>
             </div>
 
             <div class="service-item reveal">
-              <div class="service-header-mobile">
-                <div class="service-number">02</div>
-                <div class="service-arrow">→</div>
+              <div class="service-left">
+                <div class="service-num-wrap">
+                  <span class="service-number">02</span>
+                  <span class="service-arrow">→</span>
+                </div>
+                <h3 class="service-title">Architectural Planning</h3>
               </div>
-              <div class="service-title">Architectural Planning</div>
-              <div class="service-desc">
-                Full-scale residential master planning, site analysis, structural engineering integration, and regulatory approvals for ground-up luxury builds.
+              <div class="service-right">
+                <p class="service-desc">
+                  Full-scale residential master planning, site analysis, structural engineering integration, and regulatory approvals for ground-up luxury builds.
+                </p>
               </div>
-              <div class="service-arrow desktop-only">→</div>
             </div>
 
             <div class="service-item reveal">
-              <div class="service-header-mobile">
-                <div class="service-number">03</div>
-                <div class="service-arrow">→</div>
+              <div class="service-left">
+                <div class="service-num-wrap">
+                  <span class="service-number">03</span>
+                  <span class="service-arrow">→</span>
+                </div>
+                <h3 class="service-title">Renovation & Restorations</h3>
               </div>
-              <div class="service-title">Renovation & Restorations</div>
-              <div class="service-desc">
-                Sensitive modernization of heritage structures and modern estates, preserving historical character while embedding state-of-the-art living systems.
+              <div class="service-right">
+                <p class="service-desc">
+                  Sensitive modernization of heritage structures and modern estates, preserving historical character while embedding state-of-the-art living systems.
+                </p>
               </div>
-              <div class="service-arrow desktop-only">→</div>
             </div>
 
             <div class="service-item reveal">
-              <div class="service-header-mobile">
-                <div class="service-number">04</div>
-                <div class="service-arrow">→</div>
+              <div class="service-left">
+                <div class="service-num-wrap">
+                  <span class="service-number">04</span>
+                  <span class="service-arrow">→</span>
+                </div>
+                <h3 class="service-title">Furniture & Art Curation</h3>
               </div>
-              <div class="service-title">Furniture & Art Curation</div>
-              <div class="service-desc">
-                Global sourcing of rare vintage design masterworks, commissioned artisan furniture, and cohesive fine art placement for unified environments.
+              <div class="service-right">
+                <p class="service-desc">
+                  Global sourcing of rare vintage design masterworks, commissioned artisan furniture, and cohesive fine art placement for unified environments.
+                </p>
               </div>
-              <div class="service-arrow desktop-only">→</div>
             </div>
 
           </div>
@@ -1765,8 +1851,8 @@
             
             <div class="contact-info">
               <div>
-                <span class="eyebrow reveal">Inquiries</span>
-                <h2 class="section-heading reveal">Let’s Design Your Next Space</h2>
+                <span class="eyebrow reveal">Consultation</span>
+                <h2 class="section-heading reveal">Request a Consultation</h2>
                 <p style="color: var(--text-subtle); font-weight: 300;" class="reveal">
                   We accept a limited number of private residential and architectural commissions each year to maintain uncompromising craftsmanship.
                 </p>
@@ -1779,8 +1865,8 @@
                 </div>
 
                 <div class="detail-block">
-                  <label>Direct Telephone</label>
-                  <p>+44 (0)20 7946 0192</p>
+                  <label>Direct Telephone / WhatsApp</label>
+                  <p>+94 77 407 0056</p>
                 </div>
 
                 <div class="detail-block">
@@ -1790,41 +1876,72 @@
               </div>
             </div>
 
-            <!-- Minimal Form -->
+            <!-- Consultation Form -->
             <div>
-              <form class="contact-form reveal" id="consultation-form">
+              <form class="contact-form reveal" id="consultation-form" novalidate>
                 <div class="form-group">
-                  <label for="name">Your Name *</label>
-                  <input type="text" id="name" required class="form-control" placeholder="Lord / Lady / Mr. / Ms. Full Name" />
+                  <label for="fullName">Full Name *</label>
+                  <input type="text" id="fullName" class="form-control" placeholder="e.g. Alexander Vaughan" />
+                  <span class="field-error-msg" id="error-fullName">Please enter your full name</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="contactNumber">Contact Number *</label>
+                  <input type="tel" id="contactNumber" class="form-control" placeholder="+94 77 407 0056" />
+                  <span class="field-error-msg" id="error-contactNumber">Please enter your contact number</span>
                 </div>
 
                 <div class="form-group">
                   <label for="email">Email Address *</label>
-                  <input type="email" id="email" required class="form-control" placeholder="name@domain.com" />
+                  <input type="email" id="email" class="form-control" placeholder="name@domain.com" />
+                  <span class="field-error-msg" id="error-email">Please enter a valid email address</span>
                 </div>
 
                 <div class="form-group">
-                  <label for="service">Commission Type *</label>
-                  <select id="service" required class="form-control form-controlOption">
-                    <option value="" disabled selected>Select Primary Interest</option>
-                    <option value="architectural-planning">Architectural Planning & Build</option>
-                    <option value="interior-design">Complete Interior Design</option>
-                    <option value="renovation">Estate Renovation & Modernization</option>
-                    <option value="curation">Furniture & Fine Art Curation</option>
+                  <label for="location">Location / Area *</label>
+                  <input type="text" id="location" class="form-control" placeholder="e.g. Colombo, Kandy" />
+                  <span class="field-error-msg" id="error-location">Please enter your location or area</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="service">Service Needed *</label>
+                  <select id="service" class="form-control form-controlOption">
+                    <option value="" disabled selected>Select Service Needed</option>
+                    <option value="Interior Design">Interior Design</option>
+                    <option value="Architectural Planning">Architectural Planning</option>
+                    <option value="Renovation & Restoration">Renovation & Restoration</option>
+                    <option value="Furniture & Art Curation">Furniture & Art Curation</option>
+                    <option value="Full House Build">Full House Build</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <span class="field-error-msg" id="error-service">Please select a service needed</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="budget">Estimated Budget Range</label>
+                  <select id="budget" class="form-control form-controlOption">
+                    <option value="" selected>Select Budget Range (Optional)</option>
+                    <option value="Under Rs. 500,000">Under Rs. 500,000</option>
+                    <option value="Rs. 500,000 - 1,000,000">Rs. 500,000 - 1,000,000</option>
+                    <option value="Rs. 1,000,000 - 2,500,000">Rs. 1,000,000 - 2,500,000</option>
+                    <option value="Rs. 2,500,000 - 5,000,000">Rs. 2,500,000 - 5,000,000</option>
+                    <option value="Above Rs. 5,000,000">Above Rs. 5,000,000</option>
+                    <option value="Prefer to discuss">Prefer to discuss</option>
                   </select>
                 </div>
 
                 <div class="form-group">
-                  <label for="message">Project Scope & Location *</label>
-                  <textarea id="message" required class="form-control" placeholder="Share brief details regarding site location, timeline, and spatial vision..."></textarea>
+                  <label for="message">Message / Project Details *</label>
+                  <textarea id="message" class="form-control" placeholder="Tell us about your project..."></textarea>
+                  <span class="field-error-msg" id="error-message">Please share brief project details</span>
                 </div>
 
-                <button type="submit" class="btn-outline">
-                  <span>Submit Private Inquiry</span>
+                <button type="submit" id="submit-btn" class="btn-outline">
+                  <span id="btn-text">Submit Request via WhatsApp</span>
                 </button>
 
                 <div class="form-status" id="form-status-msg">
-                  Thank you for reaching out to Studio2020. Your private inquiry has been received. Our studio director will respond within 24 business hours.
+                  Redirecting you to WhatsApp to send your inquiry...
                 </div>
               </form>
             </div>
@@ -2149,19 +2266,125 @@
           }
         });
 
-        // 6. CONTACT FORM SUBMISSION MOCK
+        // 6. WHATSAPP CONSULTATION FORM SUBMISSION
+        const WHATSAPP_NUMBER = "94774070056";
+
         const contactForm = document.getElementById('consultation-form');
         const formStatus = document.getElementById('form-status-msg');
+        const submitBtn = document.getElementById('submit-btn');
+        const btnText = document.getElementById('btn-text');
 
         if (contactForm) {
           contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            formStatus.classList.add('active');
-            contactForm.reset();
+
+            const fullNameInput = document.getElementById('fullName');
+            const contactNumberInput = document.getElementById('contactNumber');
+            const emailInput = document.getElementById('email');
+            const locationInput = document.getElementById('location');
+            const serviceInput = document.getElementById('service');
+            const budgetInput = document.getElementById('budget');
+            const messageInput = document.getElementById('message');
+
+            const requiredFields = [
+              { input: fullNameInput, errorId: 'error-fullName' },
+              { input: contactNumberInput, errorId: 'error-contactNumber' },
+              { input: emailInput, errorId: 'error-email', isEmail: true },
+              { input: locationInput, errorId: 'error-location' },
+              { input: serviceInput, errorId: 'error-service' },
+              { input: messageInput, errorId: 'error-message' }
+            ];
+
+            let isValid = true;
+            let firstInvalidInput = null;
+
+            requiredFields.forEach(field => {
+              const val = field.input ? field.input.value.trim() : '';
+              const errorEl = document.getElementById(field.errorId);
+              
+              let fieldValid = true;
+              if (!val) {
+                fieldValid = false;
+              } else if (field.isEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+                fieldValid = false;
+              }
+
+              if (!fieldValid) {
+                isValid = false;
+                if (field.input) field.input.classList.add('invalid-field');
+                if (errorEl) errorEl.classList.add('visible');
+                if (!firstInvalidInput && field.input) firstInvalidInput = field.input;
+              } else {
+                if (field.input) field.input.classList.remove('invalid-field');
+                if (errorEl) errorEl.classList.remove('visible');
+              }
+            });
+
+            if (!isValid) {
+              if (firstInvalidInput) firstInvalidInput.focus();
+              return;
+            }
+
+            // Pulse loading state for smooth UI feel
+            if (submitBtn) submitBtn.classList.add('loading');
+            if (btnText) btnText.textContent = 'Opening WhatsApp...';
+
+            const fullName = fullNameInput.value.trim();
+            const phone = contactNumberInput.value.trim();
+            const email = emailInput.value.trim();
+            const location = locationInput.value.trim();
+            const service = serviceInput.value.trim();
+            const budget = budgetInput.value.trim() || 'Not specified';
+            const message = messageInput.value.trim();
+
+            const formattedMessage = `New Inquiry from Website
+--------------------------
+Name: ${fullName}
+Phone: ${phone}
+Email: ${email}
+Location: ${location}
+Service: ${service}
+Budget: ${budget}
+
+Message:
+${message}`;
+
+            const encodedMessage = encodeURIComponent(formattedMessage);
 
             setTimeout(() => {
-              formStatus.classList.remove('active');
-            }, 8000);
+              window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
+
+              if (formStatus) {
+                formStatus.textContent = "Redirecting you to WhatsApp to send your inquiry...";
+                formStatus.classList.add('active');
+              }
+
+              if (submitBtn) submitBtn.classList.remove('loading');
+              if (btnText) btnText.textContent = 'Submit Request via WhatsApp';
+              contactForm.reset();
+
+              setTimeout(() => {
+                if (formStatus) formStatus.classList.remove('active');
+              }, 8000);
+            }, 500);
+          });
+
+          // Live clear of error indicators
+          ['fullName', 'contactNumber', 'email', 'location', 'service', 'message'].forEach(id => {
+            const input = document.getElementById(id);
+            const errorEl = document.getElementById(`error-${id}`);
+            if (input) {
+              input.addEventListener('input', () => {
+                input.classList.remove('invalid-field');
+                if (errorEl) errorEl.classList.remove('visible');
+              });
+              if (input.tagName === 'SELECT') {
+                input.addEventListener('change', () => {
+                  input.classList.remove('invalid-field');
+                  if (errorEl) errorEl.classList.remove('visible');
+                });
+              }
+            }
           });
         }
 
